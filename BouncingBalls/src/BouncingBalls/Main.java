@@ -8,7 +8,7 @@ public class Main {
         Frame frame = new Frame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.motor.start();
+        frame.engine.start();
     }
     
 }

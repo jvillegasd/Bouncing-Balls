@@ -5,59 +5,18 @@ import java.awt.Graphics;
 
 public class Ball {
 
-    int radius;
-    int x;
-    int y;
-    int vx;
-    int vy;
-    int var = 0;
-    int var2 = 0;
+    final int radius = 10;
     Color color;
+    Physics physics;
 
-    public Ball(int radius, int x, int y, int vx, int vy, Color color) {
-        this.radius = radius;
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
+    public Ball(int x, int y, int vx, int vy, Color color) {
         this.color = color;
+        this.physics = new Physics(x, y, vx, vy);
     }
 
     public void draw(Graphics g) {
         g.setColor(this.color);
-        g.fillOval(x, y, 2 * this.radius, 2 * this.radius);
+        g.fillOval(physics.x, physics.y, 2 * this.radius, 2 * this.radius);
     }
 
-    public void move(int width, int height) {
-        if (this.x - 1 < 0) {
-            this.vx *= -1;
-            this.x = 3;
-        }
-        if (this.x > width - (58 + var2)) {
-            this.x = width - (58 + var2);
-            this.vx *= -1;
-        }
-        if (this.y - 2 < 0) {
-            this.vy *= -1;
-            this.y = 3;
-        }
-        if (this.y > height - (62 + var)) {
-            this.vy *= -1;
-            this.y = height - (62 + var);
-        }
-        this.x = this.x + this.vx;
-        this.y = this.y + this.vy;
-    }
-
-    public void setVar() {
-        String radius = this.radius + "";
-        if (radius.length() > 1) {
-            if (Integer.parseInt(radius.substring(0, 1)) > 1) {
-                var = this.radius;
-            }
-            if (Integer.parseInt(radius.substring(0, 1)) == 1) {
-                var2 = -21;
-            }
-        }
-    }
 }

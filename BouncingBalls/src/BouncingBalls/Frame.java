@@ -13,7 +13,7 @@ public class Frame extends JFrame {
     public Canvas canvas;
     public List<Ball> balls = new ArrayList<Ball>();
     World world;
-    Thread motor;
+    Thread engine;
 
     public Frame() {
         this.setTitle("Bouncing Balls");
@@ -21,27 +21,33 @@ public class Frame extends JFrame {
         this.canvas = new Canvas();
         this.setLayout(new BorderLayout());
         this.add(this.canvas, BorderLayout.CENTER);
-        for (int i = 0; i < 100; i++) {
-            Color color = new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
-            balls.add(new Ball(10, (int)(Math.random()*getHeight()), (int)(Math.random()*getWidth()), 8, 4, color));
-            balls.get(i).setVar();
+        for (int i = 0; i < 10; i++) {
+            int r = (int) (Math.random() * 255);
+            int g = (int) (Math.random() * 255);
+            int b = (int) (Math.random() * 255);
+            int x = (int) (Math.random() * getWidth());
+            int y = (int) (Math.random() * getHeight());
+            int vx = (int) (Math.random() * 11) + 1;
+            int vy = (int) (Math.random() * 11) + 1;
+            Color color = new Color(r, g, b);
+            balls.add(new Ball(x, y, vx, vy, color));
         }
-        this.world = new World(this.getWidth(), this.getHeight(), Color.BLACK);    
-        this.motor = new Thread(new Runnable() {
+        this.world = new World(this.getWidth(), this.getHeight(), Color.BLACK);
+        this.engine = new Thread(new Runnable() {
             @Override
             public void run() {
                 canvas.createBufferStrategy(3);
                 try {
                     while (true) {
-                        Graphics g = canvas.getBufferStrategy().getDrawGraphics();                        
+                        Graphics g = canvas.getBufferStrategy().getDrawGraphics();
                         world.refresh(getWidth(), getHeight());
                         world.draw(g);
-                        for(Ball ball: balls){
-                            ball.move(getWidth(), getHeight());
+                        for (Ball ball : balls) {
+                            ball.physics.move(getWidth(), getHeight());
                             ball.draw(g);
                         }
                         canvas.getBufferStrategy().show();
-                        Thread.sleep(10);
+                        Thread.sleep(13);
                     }
                 } catch (Exception e) {
                 }
