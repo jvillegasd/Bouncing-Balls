@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Ball {
 
-    final int radius = 10;
+    final static int RADIUS = 10;
     Color color;
     Physics physics;
 
@@ -16,7 +16,7 @@ public class Ball {
 
     public void draw(Graphics g) {
         g.setColor(this.color);
-        g.fillOval(physics.x, physics.y, 2 * this.radius, 2 * this.radius);
+        g.fillOval(physics.x, physics.y, 2 * RADIUS, 2 * RADIUS);
     }
 
 }

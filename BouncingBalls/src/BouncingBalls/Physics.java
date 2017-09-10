@@ -1,5 +1,7 @@
 package BouncingBalls;
 
+import java.util.List;
+
 public class Physics {
 
     int x, y, vx, vy;
@@ -11,13 +13,18 @@ public class Physics {
         this.vy = vy;
     }
 
-    public void move(int width, int height) {
-        this.collide(width, height);
+    public void move(int width, int height, List balls) {
+        this.collision(width, height, balls);
         this.x = this.x + this.vx;
         this.y = this.y + this.vy;
     }
 
-    private void collide(int width, int height) {
+    private void collision(int width, int height, List balls) {
+        this.wallCollision(width, height);
+        this.ballsCollision(width, height, balls);
+    }
+    
+    private void wallCollision(int width, int height){
         if (this.x - 1 < 0) {
             this.vx *= -1;
             this.x = 3;
@@ -34,5 +41,9 @@ public class Physics {
             this.vy *= -1;
             this.y = height - 62;
         }
+    }
+    
+    private void ballsCollision(int width, int height, List balls){
+        
     }
 }

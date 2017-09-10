@@ -43,7 +43,7 @@ public class Frame extends JFrame {
                         world.refresh(getWidth(), getHeight());
                         world.draw(g);
                         for (Ball ball : balls) {
-                            ball.physics.move(getWidth(), getHeight());
+                            ball.physics.move(getWidth(), getHeight(), balls);
                             ball.draw(g);
                         }
                         canvas.getBufferStrategy().show();
